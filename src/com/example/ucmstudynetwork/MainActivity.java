@@ -79,7 +79,7 @@ public class MainActivity extends Activity
 			{				
 				if(password.toString().length()!=0)
 				{
-					Intent intent = new Intent(MainActivity.this, Allgroups.class); 
+					Intent intent = new Intent(MainActivity.this, TestAllgroups.class); 
 					startActivity(intent);
 				}
 				else

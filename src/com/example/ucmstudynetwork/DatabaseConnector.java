@@ -10,11 +10,10 @@ import java.util.*;
 
 import android.os.AsyncTask;
 
-public class DatabaseConnector extends AsyncTask<Void,Void,String>
+public class DatabaseConnector 
 {
-	 @Override
-     protected String doInBackground(Void... params) 
-	 {
+	public Connection Open()
+	{
          String retval = "";
          try 
          {
@@ -26,16 +25,8 @@ public class DatabaseConnector extends AsyncTask<Void,Void,String>
              retval = e.toString() + " class";
              System.exit(1);
          }        
-         return retval;
-     }
-	 
-     @Override
-     protected void onPostExecute(String value) 
-     {
-     }	
-     
-     public Connection OpenConnection()
-     {
+         //return retval;
+   
          String url = "jdbc:postgresql://10.0.2.2:5432/postgres";
          Connection conn = null;
          try 
@@ -51,7 +42,8 @@ public class DatabaseConnector extends AsyncTask<Void,Void,String>
 			 System.out.println("$$$$$$$$$$$$$$$$$$$$");
          }         
          return conn;
-     }
+	}
+     /*
      
      public ResultSet task(Connection conn, String sql)
      {
@@ -84,7 +76,7 @@ public class DatabaseConnector extends AsyncTask<Void,Void,String>
 		}
           
      }
-    
+    */
      public void CloseConnection (Connection conn)
      {
     	 try 

@@ -3,63 +3,48 @@ package com.example.ucmstudynetwork;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.Arrays;
+import java.util.ArrayList;
 
-import android.app.Activity;
 import android.app.ListActivity;
-import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.TableLayout;
 
-public class Allgroups extends ListActivity 
+public class TestAllgroups extends ListActivity 
 {
-	 public SharedPreferences savedSearches; 
-	 private TableLayout groupTableLayout;
-	 private ListView contactListView; // the ListActivity's ListView
-	 private CursorAdapter contactAdapter;
-	 
-	 @Override
+	public static final String ROW_ID = "row_id";
+	private ListView contactListView;
+	private SimpleCursorAdapter contactAdapter;
+	ListView listViewgroupList ;
+	
+	 @SuppressWarnings("deprecation")
+	@Override
 	   public void onCreate(Bundle savedInstanceState) 
 	   {
-	      super.onCreate(savedInstanceState); // call the superclass version
-	      //setContentView(R.layout.allgroups);
-	      
-	      //savedSearches = getSharedPreferences("searches", MODE_WORLD_WRITEABLE);
+	      super.onCreate(savedInstanceState); 
 	      contactListView = getListView();
-	      //contactListView.setOnItemClickListener(viewContactListener); 
+	      
+	      ListView listViewgroupList = (ListView)findViewById(R.id.listViewgroupList); 
+	    
 	      
 	      String[] from = new String[] { "name" };
 	      int[] to = new int[] { R.id.groupTextView };
-	      contactAdapter = new SimpleCursorAdapter(Allgroups.this, R.layout.allgroups, null, from, to);
-	      setListAdapter(contactAdapter); // set contactView's adapter
-	      	      
-	      Button createGroup = (Button) findViewById(R.id.newgroupButton);
-	      createGroup.setOnClickListener(newgroupButtonListener);	      
-	      
-	      /**************
-	       * 
-	       * get group names from table and display them
-	       * 
-	       */
-	     // new getGroupList().execute("");
+	      contactAdapter = new SimpleCursorAdapter(TestAllgroups.this, R.layout.allgroups, null, from, to);
+	      setListAdapter(contactAdapter); 
 	   }
 	 
 	   @Override
 	   protected void onResume() 
 	   {
-	      super.onResume(); // call super's onResume method
+		   super.onResume(); // call super's onResume method
 	      
 	       // create new GetContactsTask and execute it 
 	       new getGroupList().execute((Object[]) null);
@@ -115,7 +100,9 @@ public class Allgroups extends ListActivity
 		@Override
 		 protected void onPostExecute(Cursor result)
 	      {
-	         contactAdapter.changeCursor(result); // set the adapter's Cursor
+			ArrayList ch = new ArrayList();
+			listViewgroupList.addChildrenForAccessibility(ch);
+			((ResultSet) result).next(); // set the adapter's Cursor
 	         db.CloseConnection(cn);
 	      } 
 	 }
@@ -126,7 +113,7 @@ public class Allgroups extends ListActivity
 	      {
 			 try
 			 {
-				 Intent intent = new Intent(Allgroups.this, CreateNewGroup.class); 
+				 Intent intent = new Intent(TestAllgroups.this, CreateNewGroup.class); 
 				 startActivity(intent);
 			 }
 			 catch(Exception e)
@@ -134,6 +121,12 @@ public class Allgroups extends ListActivity
 				 e.printStackTrace();
 			 }
 	      }
+
+		@Override
+		public void onClick(DialogInterface dialog, int which) {
+			// TODO Auto-generated method stub
+			
+		}
 	   };
 	    
 }

@@ -16,14 +16,16 @@
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal" >
 
-		<TextView
-		    android:id="@+id/txtvfrgtpwdtitle"
+          <TextView
+              android:id="@+id/txtvfrgtpwdtitle"
 		    android:layout_width="wrap_content"
 		    android:layout_height="wrap_content"
 		    android:layout_gravity="center_horizontal"
 		    android:text="@string/group"
 		    android:textColor="@android:color/white"
-		    android:textSize="25sp" />
+		    android:textSize="25sp"/>
+
+
 		
 		
         <Button
@@ -50,21 +52,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1" >
-
-        <ScrollView
-            android:id="@+id/groupScrollView"
-            android:layout_width="match_parent"
-            android:layout_span="2"
-            android:padding="5dp"
-            tools:ignore="UselessParent" >
-
-            <TableLayout
-                android:id="@+id/groupTableLayout"
+            <ListView
+                android:id="@+id/listViewgroupList"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                android:stretchColumns="*" >
-            </TableLayout>
-        </ScrollView>
+                android:layout_height="match_parent" >
+            </ListView>
+
     </TableRow>
 </TableLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/darkred"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/edtchatreceiver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="34dp"
+        android:ems="10"
+        android:hint="@string/recivername"
+        android:inputType="text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_size" >
+    </EditText>
+
+    <TableRow
+        android:id="@+id/tableRowChatList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/edtchatreceiver"
+        android:layout_marginLeft="38dp"
+        android:layout_marginTop="28dp" >
+
+        <ScrollView
+            android:id="@+id/groupScrollView"
+            android:layout_width="match_parent"
+            android:layout_span="2"
+            android:padding="5dp"
+            tools:ignore="UselessParent" >
+
+            <TableLayout
+                android:id="@+id/tableLayoutchatinnerlist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:stretchColumns="*" >
+            </TableLayout>
+        </ScrollView>
+    </TableRow>
+
+    <EditText
+        android:id="@+id/etnewmessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnsubmit"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="18dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/newchatmessage"
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_size" />
+
+    <Button
+        android:id="@+id/btnsubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tableRowChatList"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="24dp"
+        android:text="@string/send"
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_size" />
+
+</RelativeLayout>

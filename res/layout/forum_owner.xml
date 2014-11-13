@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tableLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:stretchColumns="*" 
+    android:background="@drawable/darkred">
+
+    <!-- tableRow0 -->
+	
+      <TableRow
+        android:id="@+id/tableRow0"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal" >
+
+          <TextView
+              android:id="@+id/txtForumtitle"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:text="@string/forum"
+              android:textColor="@android:color/white"
+              android:textSize="25sp"
+               />
+		
+        <Button
+            android:id="@+id/newgroupButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/new_button"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+        
+       	</TableRow>
+	
+    <!-- tableRow2 -->
+    <TableRow
+        android:id="@+id/tableRow2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" >
+
+        <ScrollView
+            android:id="@+id/groupScrollView"
+            android:layout_width="match_parent"
+            android:layout_span="2"
+            android:padding="5dp"
+            tools:ignore="UselessParent" >
+
+            <TableLayout
+                android:id="@+id/groupTableLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:stretchColumns="*" >
+            </TableLayout>
+        </ScrollView>
+    </TableRow>
+</TableLayout>

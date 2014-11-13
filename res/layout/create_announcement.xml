@@ -1,0 +1,58 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/darkred" >
+
+    <TextView
+        android:id="@+id/tvannouncement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/ano"
+        android:textColor="@color/white" 
+        android:textSize="@dimen/content_size"/>
+
+    <TextView
+        android:id="@+id/tvcreateanntitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvannouncement"
+        android:layout_below="@+id/tvannouncement"
+        android:layout_marginLeft="14dp"
+        android:layout_marginTop="44dp"
+        android:hint="@string/createanntitle" 
+        android:textColor="@color/white"        
+		android:textSize="@dimen/content_size"
+        />
+
+    <EditText
+        android:id="@+id/edtcreateannmsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvcreateanntitle"
+        android:layout_below="@+id/tvcreateanntitle"
+        android:layout_marginTop="41dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:hint="@string/creatanndesc" 
+        android:textColor="@color/white"        
+		android:textSize="@dimen/content_size"
+		 >
+
+   
+    </EditText>
+
+    <Button
+        android:id="@+id/btnpost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtcreateannmsg"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp"
+        android:text="@string/post" 
+        android:textColor="@color/white"        
+		android:textSize="@dimen/content_size"/>
+
+</RelativeLayout>

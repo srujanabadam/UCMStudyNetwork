@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/darkred"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvforumtitleheading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/forumtitle"
+        android:textColor="@color/white"
+        android:textSize="@dimen/page_title" />
+
+    <TextView
+        android:id="@+id/tvforumpostedby"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvforumtitleheading"
+        android:layout_below="@+id/tvforumtitleheading"
+        android:layout_marginTop="50dp"
+        android:text="@string/tvforumpostedby"
+         android:textColor="@color/white"
+        android:textSize="@dimen/content_size" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tvforumpostedby"
+        android:layout_alignBottom="@+id/tvforumpostedby"
+         android:layout_marginTop="50dp"
+        android:text="@string/tvforumpostedby"
+         android:textColor="@color/white"
+        android:textSize="@dimen/content_size" 
+        android:layout_toRightOf="@+id/tvforumtitleheading"
+         />
+
+    <TextView
+        android:id="@+id/tvforumname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvforumpostedby"
+        android:layout_below="@+id/tvforumpostedby"
+        android:layout_marginTop="40dp"
+        android:text="@string/forumtitle"
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_size" />
+
+    <TextView
+        android:id="@+id/tvforumdescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvforumpostedby"
+        android:layout_below="@+id/tvforumpostedby"
+        android:layout_marginTop="104dp"
+        android:text="@string/forumdescription"
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_size" />
+
+   
+    <EditText android:inputType="text"></EditText>
+
+    <EditText
+        android:id="@+id/edtforumcomment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvforumdescription"
+        android:layout_below="@+id/tvforumdescription"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="@string/forumcomment"
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_size" >
+
+    </EditText>
+    
+    <Button
+        android:id="@+id/btnsubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/tvforumpostedby"
+        android:layout_below="@+id/edtforumcomment"
+        android:layout_marginTop="17dp"
+        android:text="@string/submit" 
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_size"
+        />
+
+</RelativeLayout>

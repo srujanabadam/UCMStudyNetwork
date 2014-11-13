@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/darkred"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvUPtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="110dp"
+        android:layout_marginTop="45dp"
+        android:text="@string/userprofile"
+        android:textColor="@color/white"
+        android:textSize="@dimen/page_title" />
+
+    <TextView
+        android:id="@+id/textViewtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tvUPtitle"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="72dp"
+        android:text="@string/name" 
+        android:textSize="@dimen/content_size"
+        android:textColor="@color/white"/>
+
+    <TextView
+        android:id="@+id/textViewUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewtitle"
+        android:layout_alignBottom="@+id/textViewtitle"
+        android:layout_alignLeft="@+id/tvUPtitle"
+        android:layout_marginLeft="66dp"
+        android:text="@string/name"
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_size" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="34dp"
+        android:text="@string/changename"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewtitle"
+        android:layout_below="@+id/textViewtitle"
+        android:layout_marginTop="48dp"
+        android:text="@string/resetpwd"
+        android:textColor="@color/white" />
+
+</RelativeLayout>

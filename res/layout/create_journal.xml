@@ -1,0 +1,60 @@
+<RelativeLayout android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/darkred" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/tvpostjourn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/pstjrnl"
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_size" />
+
+    <TextView
+        android:id="@+id/tvcreatejurnltitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvpostjourn"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="66dp"
+        android:hint="@string/createjurnltitle"
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_size" />
+
+    <EditText
+        android:id="@+id/edtattachfileurl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvcreatejurnltitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="39dp"
+        android:ems="10"
+        android:hint="@string/path" >
+        </EditText>
+
+    <Button
+        android:id="@+id/browse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtattachfileurl"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/browse" 
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_size" />
+
+    <Button
+        android:id="@+id/btnpost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/browse"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="38dp"
+        android:text="@string/post"
+        android:textColor="@color/white"
+        android:textSize="@dimen/content_size" />
+
+</RelativeLayout>

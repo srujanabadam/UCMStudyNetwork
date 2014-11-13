@@ -15,12 +15,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 
 public class TestAllgroups extends ListActivity 
 {
 	public static final String ROW_ID = "row_id";
+	private static final String[] StringArray = null;
 	private ListView contactListView;
 	private SimpleCursorAdapter contactAdapter;
 	ListView listViewgroupList ;
@@ -32,16 +34,19 @@ public class TestAllgroups extends ListActivity
 	      super.onCreate(savedInstanceState); 
 	      contactListView = getListView();
 	      
-	      ListView listViewgroupList = (ListView)findViewById(R.id.listViewgroupList); 
-	    
+	     ListView listViewgroupList = (ListView)findViewById(R.id.listViewgroupList); 
+	      ArrayAdapter adapter = new ArrayAdapter<String>(this,  
+	              R.id.listViewgroupList, 
+	              StringArray);
+	      listViewgroupList.setAdapter(adapter);
 	      
-	      String[] from = new String[] { "name" };
-	      int[] to = new int[] { R.id.groupTextView };
-	      contactAdapter = new SimpleCursorAdapter(TestAllgroups.this, R.layout.allgroups, null, from, to);
-	      setListAdapter(contactAdapter); 
+//	      String[] from = new String[] { "name" };
+//	      int[] to = new int[] { R.id.groupTextView };
+//	      contactAdapter = new SimpleCursorAdapter(TestAllgroups.this, R.layout.allgroups, null, from, to);
+//	      setListAdapter(contactAdapter); 
 	   }
 	 
-	   @Override
+	/*   @Override
 	   protected void onResume() 
 	   {
 		   super.onResume(); // call super's onResume method
@@ -61,7 +66,7 @@ public class TestAllgroups extends ListActivity
 	      contactAdapter.changeCursor(null); // adapted now has no Cursor
 	      super.onStop();
 	   } // end method onStop
-	 
+*/	 
 	 public class getGroupList extends AsyncTask<Object, Object, Cursor> 
 	 {
 		 DatabaseConnector db = new DatabaseConnector();
@@ -94,15 +99,22 @@ public class TestAllgroups extends ListActivity
 				e.printStackTrace();
 			} 
 
-			return (Cursor) rs;
+			return  (Cursor) rs;
 			}
 			
 		@Override
 		 protected void onPostExecute(Cursor result)
-	      {
-			ArrayList ch = new ArrayList();
-			listViewgroupList.addChildrenForAccessibility(ch);
-			((ResultSet) result).next(); // set the adapter's Cursor
+	      {			
+			while (((ResultSet) result).next()) 
+			{
+			    String em = result.getString("username");
+			    StringArray = em.split("\n");
+			    for (int i =0; i < StringArray.length; i++){
+			        System.out.println(StringArray[i]);
+			    }
+			}
+			
+			// set the adapter's Cursor
 	         db.CloseConnection(cn);
 	      } 
 	 }

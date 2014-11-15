@@ -1,21 +1,11 @@
 package com.studynetwork;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import com.example.ucmstudynetwork.R;
 import com.studynetwork.tasks.LoginTask;
-import com.studynetwork.util.DatabaseHelper;
-import com.studynetwork.util.LoginManager;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -80,9 +70,9 @@ public class MainActivity extends Activity implements OnClickListener{
 	private void clickLoginButton(){
 		if (username.toString().trim().length()!=0){
 			if(password.toString().trim().length()!=0){
-				new LoginTask(this, new TaskCompleteListener()).execute(username, password);
-				//Intent intent = new Intent(MainActivity.this, TestAllgroups.class); 					
-				//startActivity(intent);
+				//new LoginTask(this, new TaskCompleteListener()).execute(username, password);
+				Intent intent = new Intent(this, Allgroups.class); 					
+				startActivity(intent);
 			}
 			else{
 				showAlertDialog(R.string.errorTitlepwd, R.string.errorMessagepwd, R.string.errorButton);
@@ -172,14 +162,15 @@ public class MainActivity extends Activity implements OnClickListener{
 		{}
 	 };
 	 
-	 private class TaskCompleteListener implements AsyncTaskCompleteListener<String>
-	 {
+	 private class TaskCompleteListener implements AsyncTaskCompleteListener<String>{
 	 
-        @Override
+        
+		 
+		@Override
         public void onTaskComplete(String result){
         	editTextUsername.setText(result);
         }
-    }
+     }
 	 	 	
 	 
 }

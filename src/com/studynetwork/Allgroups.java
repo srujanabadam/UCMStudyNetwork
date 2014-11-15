@@ -37,84 +37,10 @@ public class Allgroups extends ListActivity
 	   public void onCreate(Bundle savedInstanceState) 
 	   {
 	      super.onCreate(savedInstanceState); // call the superclass version
-	      //setContentView(R.layout.allgroups);
+	      setContentView(R.layout.allgroups);
 	      
-	      //savedSearches = getSharedPreferences("searches", MODE_WORLD_WRITEABLE);
-	      contactListView = getListView();
-	      //contactListView.setOnItemClickListener(viewContactListener); 
-	      
-	      String[] from = new String[] { "name" };
-	      int[] to = new int[10];// { R.id.groupTextView };
-	      contactAdapter = new SimpleCursorAdapter(Allgroups.this, R.layout.allgroups, null, from, to);
-	      setListAdapter(contactAdapter); // set contactView's adapter
-	      	      
-	      Button createGroup = (Button) findViewById(R.id.newgroupButton);
-	      createGroup.setOnClickListener(newgroupButtonListener);	      
-	      
-	      /**************
-	       * 
-	       * get group names from table and display them
-	       * 
-	       */
-	     // new getGroupList().execute("");
+	      	     
 	   }
 	 
-	   @Override
-	   protected void onResume() 
-	   {
-	      super.onResume(); // call super's onResume method
-	      
-	       // create new GetContactsTask and execute it 
-	       new getGroupList().execute((Object[]) null);
-	    } // end method onResume
-	   
-	   @Override
-	   protected void onStop() 
-	   {
-	      Cursor cursor = contactAdapter.getCursor(); // get current Cursor
-	      
-	      if (cursor != null) 
-	         cursor.deactivate(); // deactivate it
-	      
-	      contactAdapter.changeCursor(null); // adapted now has no Cursor
-	      super.onStop();
-	   } // end method onStop
-	 
-	 public class getGroupList extends AsyncTask<Object, Object, Cursor> 
-	 {
-		 DatabaseHelper db = new DatabaseHelper();		 
-
-		@Override
-		protected Cursor doInBackground(Object... params) {
-			Statement st = null;
-			String sql = "select username from auth_user";
-			ResultSet rs= null;
-
-			return (Cursor) rs;
-		}
-			
-		@Override
-		 protected void onPostExecute(Cursor result)
-	      {
-	         contactAdapter.changeCursor(result); // set the adapter's Cursor
-	        // db.CloseConnection(cn);
-	      } 
-	 }
-	 
-	 public OnClickListener newgroupButtonListener = new OnClickListener() 
-	   {
-		 public void onClick(View v) 
-	      {
-			 try
-			 {
-				 Intent intent = new Intent(Allgroups.this, CreateNewGroup.class); 
-				 startActivity(intent);
-			 }
-			 catch(Exception e)
-			 {
-				 e.printStackTrace();
-			 }
-	      }
-	   };
-	    
+	 	    
 }

@@ -69,6 +69,6 @@ public class AnnouncementTask extends AsyncTask<Object,Void, List<Announcement>>
 	
 	protected void onPostExecute(List<Announcement> announcements) {
 		 listener.onTaskComplete(announcements);         
-   }
+    }
 	
 }

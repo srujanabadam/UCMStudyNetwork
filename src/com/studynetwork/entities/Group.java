@@ -2,9 +2,7 @@ package com.studynetwork.entities;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import com.studynetwork.util.DatabaseHelper;
 
@@ -126,52 +124,46 @@ public class Group {
 		}
 		
 	}
-	
-	public List<Forum> getForums(){
-		List<Forum> forums = new ArrayList();
-		
-		String query = "SELECT id, title, description, date, moderator_id " +
-					  "FROM forum WHERE group_id = " + this.id;		
+
+	public boolean addMember(int userId){
+		String query = "INSERT INTO member (is_admin, date_joined, group_id, user_id)  " + 
+					   "VALUES (?,?,?,?) ";
+		Date today = new Date();		
+		Object[] queryParams =  {false, new java.sql.Timestamp(today.getTime()) , this.id, userId};
+			
 		DatabaseHelper dh = new DatabaseHelper();
-		try{
+		try {
 			dh.openConnection();
-			ResultSet rs = dh.getQueryResultSet(query);
-			while (rs.next()){
-				forums.add(new Forum(rs.getInt("id"), rs.getString("title"), rs.getString("description"), 
-									 rs.getDate("date"), this.id, rs.getInt("moderator_id")));
-			}			
-			return forums;
-		}
-		catch(SQLException e){
+			dh.executeUpdate(query, queryParams);
+			dh.CloseConnection();
+			return true;
+		} catch (SQLException e) {				
 			e.printStackTrace();
-			return null;
-		}
+			return false;
+		}		
 	}
 	
-	public List<Quiz> getQuizzes(){
-		List<Quiz> quizzes = new ArrayList();
+	public boolean sendInvitations(int[] userId){
+		String query = "";		
+		for (int i = 0; i < userId.length; i++){
+			query +=  "INSERT INTO invitation(status, group_id, sender_id, to_id) " + 
+					  "VALUES (1," + this.id + "," + this.activeMember.getId() + "," + userId[i] + "); ";
+		}					   
 		
-		String query = "SELECT q.id, q.name, q.date, q.created_by_id " +
-					   "FROM quiz q INNER JOIN member m ON q.ceated_by_id = m.id " +
-					   "WHERE m.group_id = " + this.id + " ORDER BY q.date DESC ";		
 		DatabaseHelper dh = new DatabaseHelper();
-		try{
+		try {
 			dh.openConnection();
-			ResultSet rs = dh.getQueryResultSet(query);
-			while (rs.next()){
-				quizzes.add(new Quiz(rs.getInt("id"), rs.getString("name"), rs.getDate("date"), 
-									 rs.getInt("created_by_id")));
-			}			
-			return quizzes;
-		}
-		catch(SQLException e){
+			dh.executeBatch(query);			
+			dh.CloseConnection();
+								
+			return true;
+		} catch (SQLException e) {				
 			e.printStackTrace();
-			return null;
-		}
+			return false;
+		}		
 		
-	}
-		 
-	 
+	} 
+		
 	
 }
 

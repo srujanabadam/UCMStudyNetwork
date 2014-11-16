@@ -30,7 +30,7 @@ public class Quiz {
 	}
 	
  	public String getName(){
- 		return this.getName();
+ 		return this.name;
  	}
  	
  	public Date getDate(){

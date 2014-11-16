@@ -51,21 +51,24 @@ public class Forum {
 		return this.date;
 	}
 	
-	public Boolean Save(){
+	public Boolean save(){
 		String query = "";
+		Object[] queryParams;
 		if (id == 0){
 			query = "INSERT INTO forum(title, description, date, group_id, moderator_id) " + 
-					"VALUES ('" + title + "','" + description  + "'," + date + "," + groupId + "," + moderatorId + ")";			
+					"VALUES (?,?,?,?,?)";
+			queryParams = getInsertQueryParameters();
 		}
 		else{
-			query = "UPDATE group SET title = '" + title + "', description = '" + description +  "' " +
-					"WHERE id = " + id; 
+			query = "UPDATE group SET title = ?, description = ? " +
+					"WHERE id = " + id;
+			queryParams = getUpdateQueryParameters();
 		}
 		
 		DatabaseHelper dh = new DatabaseHelper();
 		try {
 			dh.openConnection();
-			dh.executeUpdate(query);
+			dh.executeUpdate(query, queryParams);
 			dh.CloseConnection();
 			return true;
 		} catch (SQLException e) {				
@@ -74,6 +77,11 @@ public class Forum {
 		}	
 	}
 		
+	public Boolean addComment(int memberId, String text){
+		Comment comment = new Comment(text, this.id, memberId);
+		return comment.Save();
+	}
+	
 	public List<Comment> getComments(){
 		List<Comment> comments = new ArrayList();
 		
@@ -84,7 +92,7 @@ public class Forum {
 			dh.openConnection();
 			ResultSet rs = dh.getQueryResultSet(query);
 			while (rs.next()){
-				comments.add(new Comment(rs.getInt("id"), rs.getString("text"), rs.getDate("date"), this.id,
+				comments.add(new Comment(rs.getInt("id"), rs.getString("text"), rs.getTimestamp("date"), this.id,
 									   rs.getInt("member_id")));
 			}			
 			return comments;
@@ -94,6 +102,15 @@ public class Forum {
 			return null;
 		}
 	}
+
+	private Object[] getInsertQueryParameters(){
+		Object[] params = {this.title, this.description, this.date, this.groupId, this.moderatorId};
+		return params;
+	} 
 	
+	private Object[] getUpdateQueryParameters(){
+		Object[] params = {this.title, this.description};
+		return params;
+	}
 	
 }

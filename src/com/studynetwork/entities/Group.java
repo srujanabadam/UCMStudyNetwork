@@ -18,6 +18,8 @@ public class Group {
 	private int type;
 	private int sectionId;
 	
+	private Member activeMember;
+	
 	public Group(){}
 	
 	public Group(int id){
@@ -60,27 +62,48 @@ public class Group {
 		return type;
 	}
 	
+	public Member getActiveMember(){
+		return this.activeMember;
+	}
+	
+	public void setActiveMember(Member m){
+		this.activeMember = m;
+	}
+	
 	public Boolean save(){
 		String query = "";
+		Object[] queryParams;
 		if (id == 0){
 			query = "INSERT INTO group(name, description, date, status, type, section_id) " + 
 					"VALUES ('" + name + "','" + description + "'," + date  + "," + status + ","+type+"," + sectionId + ")";			
+			queryParams = getInsertQueryParameters();
 		}
 		else{
 			query = "UPDATE group SET name = '" + name + "', description = '" + description +  "' " +
-					"WHERE id = " + id; 
+					"WHERE id = " + id;
+			queryParams = getUpdateQueryParameters();
 		}
 		
 		DatabaseHelper dh = new DatabaseHelper();
 		try {
 			dh.openConnection();
-			dh.executeUpdate(query);
+			dh.executeUpdate(query, queryParams);
 			dh.CloseConnection();
 			return true;
 		} catch (SQLException e) {				
 			e.printStackTrace();
 			return false;
 		}				
+	}
+	
+	private Object[] getInsertQueryParameters(){
+		Object[] params = {this.name, this.description, this.date, this.status, this.type, this.sectionId};
+		return params;
+	}
+	
+	private Object[] getUpdateQueryParameters(){
+		Object[] params = {this.name, this.description};
+		return params;
 	}
 	
 	private void loadGroup(){
@@ -124,6 +147,31 @@ public class Group {
 			return null;
 		}
 	}
+	
+	public List<Quiz> getQuizzes(){
+		List<Quiz> quizzes = new ArrayList();
+		
+		String query = "SELECT q.id, q.name, q.date, q.created_by_id " +
+					   "FROM quiz q INNER JOIN member m ON q.ceated_by_id = m.id " +
+					   "WHERE m.group_id = " + this.id + " ORDER BY q.date DESC ";		
+		DatabaseHelper dh = new DatabaseHelper();
+		try{
+			dh.openConnection();
+			ResultSet rs = dh.getQueryResultSet(query);
+			while (rs.next()){
+				quizzes.add(new Quiz(rs.getInt("id"), rs.getString("name"), rs.getDate("date"), 
+									 rs.getInt("created_by_id")));
+			}			
+			return quizzes;
+		}
+		catch(SQLException e){
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+		 
+	 
 	
 }
 

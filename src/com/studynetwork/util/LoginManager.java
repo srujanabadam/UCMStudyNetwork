@@ -3,8 +3,11 @@ package com.studynetwork.util;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.studynetwork.entities.User;
+
 public class LoginManager {
 			
+	private User user;
 	
 	public LoginManager(){		
 	}
@@ -14,10 +17,11 @@ public class LoginManager {
 		DatabaseHelper dh = new DatabaseHelper();
 		try{
 			dh.openConnection();
-			String query = "SELECT first_name, last_name, is_staff FROM auth_user " + 
+			String query = "SELECT id, first_name, last_name, is_staff FROM auth_user " + 
 						   "WHERE username = '" + userName.replace('-', ' ') + "'";
 			ResultSet rs = dh.getQueryResultSet(query);			
 			if (rs.next()){
+				user = new User(rs.getInt("id"), userName, rs.getString("email"), rs.getString("first_name"), rs.getString("last_name"));
 				return true;	
 			}						
 		}
@@ -26,6 +30,10 @@ public class LoginManager {
 		}
 				
 		return false;		
+	}
+	
+	public User getUser(){
+		return this.user;
 	}
 	
 	

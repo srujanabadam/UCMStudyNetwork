@@ -1,6 +1,7 @@
 package com.studynetwork;
 
 import com.example.ucmstudynetwork.R;
+import com.studynetwork.entities.User;
 import com.studynetwork.tasks.LoginTask;
 
 import android.app.Activity;
@@ -70,7 +71,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	private void clickLoginButton(){
 		if (username.toString().trim().length()!=0){
 			if(password.toString().trim().length()!=0){
-				//new LoginTask(this, new TaskCompleteListener()).execute(username, password);
+				new LoginTask(this, new TaskCompleteListener()).execute(username, password);
 				Intent intent = new Intent(this, Allgroups.class); 					
 				startActivity(intent);
 			}
@@ -162,13 +163,14 @@ public class MainActivity extends Activity implements OnClickListener{
 		{}
 	 };
 	 
-	 private class TaskCompleteListener implements AsyncTaskCompleteListener<String>{
-	 
-        
-		 
+	 private class TaskCompleteListener implements AsyncTaskCompleteListener<User>{
+	         		 
 		@Override
-        public void onTaskComplete(String result){
-        	editTextUsername.setText(result);
+        public void onTaskComplete(User user){
+			if (user != null)
+				editTextUsername.setText(user.getLastName());
+			else
+				editTextUsername.setText("malo");
         }
      }
 	 	 	

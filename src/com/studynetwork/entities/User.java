@@ -6,11 +6,18 @@ public class User {
 	private String userName;
 	private String password;
 	private String email;
-	private Boolean isStaff;
+	private String firstName;
+	private String lastName;	
 	
-					
-	public Boolean changePassword(){
-		
+	public User(int id, String userName, String email, String firstName, String lastName){
+		this.id = id;
+		this.userName = userName;		
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}			
+	
+	public Boolean changePassword(){		
 		return true;
 	}
 	
@@ -18,6 +25,21 @@ public class User {
 		return id;
 	}
 	
+	public String getUserName(){
+		return this.userName;
+	}
+	
+	public String getEmail(){
+		return this.email;
+	}
+	
+	public String getFirstName(){
+		return this.firstName;
+	}
+	
+	public String getLastName(){
+		return this.lastName;
+	}
 	
 	
 }

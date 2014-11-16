@@ -1,38 +1,39 @@
 package com.studynetwork.tasks;
 
 import com.studynetwork.AsyncTaskCompleteListener;
+import com.studynetwork.entities.User;
 import com.studynetwork.util.LoginManager;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
-public class LoginTask extends AsyncTask<String,Void,Boolean> {
+public class LoginTask extends AsyncTask<String,Void,User> {
 
 	private Context context;
-    private AsyncTaskCompleteListener<String> listener;
+    private AsyncTaskCompleteListener<User> listener;
 	
-	public LoginTask(Context context, AsyncTaskCompleteListener<String> listener){
+	public LoginTask(Context context, AsyncTaskCompleteListener<User> listener){
 		this.context = context;
 		this.listener = listener;
 	}
 	
 	@Override
-	protected Boolean doInBackground(String... params) {
+	protected User doInBackground(String... params) {
 		
 		LoginManager login = new LoginManager();		
 		if (login.authenticate(params[0], params[1])){
 			System.out.print("LOGGED IN!!!!!!!!!!!");
-			return true;
+			return login.getUser();
 		}
 		else{
 			System.out.print("NONONONO... LOGGED IN!!!!!!!!!!!");
-			return false;
+			return login.getUser();
 		}					
 		
 	}
 		
-	 protected void onPostExecute(Boolean result) {
-		 listener.onTaskComplete(""+result);         
+	protected void onPostExecute(User user) {
+		 listener.onTaskComplete(user);         
      }
 	
 }

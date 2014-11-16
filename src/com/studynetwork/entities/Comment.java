@@ -1,7 +1,9 @@
 package com.studynetwork.entities;
 
+import java.sql.Date;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.util.Calendar;
 
 import com.studynetwork.util.DatabaseHelper;
 
@@ -9,21 +11,21 @@ public class Comment {
 	
 	private int id;
 	private String text;
-	private Date date;
+	private Timestamp dateTime;
 	private int forumId;
 	private int memberId;
 	
-	public Comment(int id, String text, Date date, int forumId, int memberId){
+	public Comment(int id, String text, Timestamp dateTime, int forumId, int memberId){
 		this.id = id;
 		this.text = text;
-		this.date = date;
+		this.dateTime = dateTime;
 		this.forumId = forumId;
 		this.memberId = memberId;
 	}
 
-	public Comment(String text, Date date, int forumId, int memberId){		
-		this.text = text;
-		this.date = date;
+	public Comment(String text, int forumId, int memberId){		
+		this.text = text;	
+		this.dateTime = new Timestamp(Calendar.getInstance().getTime().getTime()); 
 		this.forumId = forumId;
 		this.memberId = memberId;
 	}
@@ -36,8 +38,8 @@ public class Comment {
 		return this.text;
 	}
 	
-	public Date getDate(){
-		return this.date;
+	public Timestamp getDate(){
+		return this.dateTime;
 	}
 	
 	public int getMemberId(){
@@ -48,12 +50,12 @@ public class Comment {
 		String query = "";
 		if (id == 0){
 			query = "INSERT INTO comment(text, date, forumId, member_id) " + 
-					"VALUES ('" + this.text + "'," + this.date + "," + this.forumId + "," + this.memberId + ")";			
+					"VALUES (?,?,?,?) ";			
 		}				
 		DatabaseHelper dh = new DatabaseHelper();
 		try {
 			dh.openConnection();
-			dh.executeUpdate(query);
+			dh.executeUpdate(query, getParameters());
 			dh.CloseConnection();
 			return true;
 		} catch (SQLException e) {				
@@ -61,5 +63,10 @@ public class Comment {
 			return false;
 		}	
 	}
+	
+	private Object[] getParameters(){
+		Object[] params = {this.text, this.dateTime, this.forumId, this.memberId};
+		return params;
+	} 
 	
 }
